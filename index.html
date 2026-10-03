@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Your Online Learning Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Added Font Awesome for icons -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            animation: fadeIn 1s ease-in-out; /* Added subtle fade-in animation */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease; /* Added transition for shadow on scroll */
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo h1 {
+            color: #11998e;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            color: #11998e;
+            transform: scale(1.05); /* Added scale effect on hover */
+        }
+
+        .btn {
+            background: #38ef7d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background: #2ecc71;
+            transform: translateY(-2px); /* Added lift effect */
+        }
+
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://via.placeholder.com/1200x600?text=Abstract+Pattern') no-repeat center center;
+            background-size: cover;
+            opacity: 0.1; /* Subtle background pattern for attractiveness */
+            z-index: 1;
+        }
+
+        .hero .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Added text shadow for depth */
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background: #ffb347;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 179, 71, 0.4); /* Added glow effect */
+        }
+
+        .btn-primary:hover {
+            background: #ff9500;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 179, 71, 0.6);
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.05); /* Added scale on hover for interactivity */
+        }
+
+        .features, .courses {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .features h2, .courses h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .feature-grid, .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item, .course-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-item:hover, .course-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-item .icon, .course-item .icon {
+            font-size: 3rem; /* Large icon size */
+            color: #38ef7d; /* Green color for icons */
+            margin-bottom: 20px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .feature-item:hover .icon, .course-item:hover .icon {
+            color: #11998e; /* Change color on hover */
+            transform: rotate(10deg); /* Fun rotate effect */
+        }
+
+        .btn-secondary {
+            background: #38ef7d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #2ecc71;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        footer ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #38ef7d;
+        }
+
+        @media (max-width: 768px) {
+            .hero .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .feature-grid, .course-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>EduLearn</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="choice login.html">Courses</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="choice login.html" class="btn">Sign Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Unlock Your Potential with Online Learning</h2>
+                <p>Discover thousands of courses from expert instructors. Learn at your own pace, anywhere, anytime.</p>
+                <a href="choice login.html" class="btn-primary">Get Started</a>
+            </div>
+            <div class="hero-image">
+                <img src="data:image/jpeg;base64,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" alt="Learning Illustration">
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Why Choose EduLearn?</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-clock icon"></i> <!-- Added clock icon for Flexible Learning -->
+                    <h3>Flexible Learning</h3>
+                    <p>Study on your schedule with 24/7 access to courses.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-user-graduate icon"></i> <!-- Added graduation cap icon for Expert Instructors -->
+                    <h3>Expert Instructors</h3>
+                    <p>Learn from industry professionals and top educators.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-certificate icon"></i> <!-- Added certificate icon for Certifications -->
+                    <h3>Certifications</h3>
+                    <p>Earn recognized certificates to boost your career.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2>Popular Courses</h2>
+            <div class="course-grid">
+                <div class="course-item">
+                    <i class="fas fa-code icon"></i> <!-- Replaced image with code icon for Web Development -->
+                    <h3>Web Development</h3>
+                    <p>Master HTML, CSS, and JavaScript.</p>
+                    <a href="#" class="btn-secondary">Enroll Now</a>
+                </div>
+                <div class="course-item">
+                    <i class="fas fa-chart-line icon"></i> <!-- Replaced image with chart icon for Data Science -->
+                    <h3>Data Science</h3>
+                    <p>Analyze data with Python and machine learning.</p>
+                    <a href="#" class="btn-secondary">Enroll Now</a>
+                </div>
+                <div class="course-item">
+                    <i class="fas fa-bullhorn icon"></i> <!-- Replaced image with bullhorn icon for Digital Marketing -->
+                    <h3>Digital Marketing</h3>
+                    <p>Boost your online presence with SEO and ads.</p>
+                    <a href="#" class="btn-secondary">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 EduLearn. All rights reserved.</p>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Performance - EduLearn</title>
+  <style>
+    :root{
+      --bg1:#11998e;
+      --bg2:#38ef7d;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --text:#111827;
+      --border:#e5e7eb;
+      --shadow: 0 15px 30px rgba(0,0,0,0.08);
+
+      --good:#10b981;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+      --purple:#8b5cf6;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;}
+    body{
+      min-height:100vh;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      padding: 24px;
+      color: var(--text);
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .topbar{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 18px;
+      flex-wrap:wrap;
+    }
+
+    .titleBox{
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 18px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      flex:1;
+      min-width: 260px;
+    }
+
+    .titleBox h1{font-size: 22px; margin-bottom: 4px;}
+    .titleBox p{color: var(--muted); font-size: 13px;}
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .btn{
+      border: none;
+      cursor: pointer;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.92);
+    }
+    .btn:hover{ transform: translateY(-2px); }
+
+    .btn.primary{
+      background: #ffffff;
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+    .btn.danger{
+      background: #fff;
+      border: 1px solid rgba(239,68,68,0.35);
+      color: var(--bad);
+    }
+    .btn.link{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr 2fr;
+      gap: 18px;
+      align-items:start;
+    }
+
+    .panel{
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(255,255,255,0.65);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .panelHead{
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .panelHead h2{
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    .panelBody{ padding: 14px 16px; }
+
+    .kpis{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .kpi{
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .kpi .label{ color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+    .kpi .val{ font-size: 20px; font-weight: 800; }
+
+    .filters{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .input, .select{
+      background:#fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      outline:none;
+      min-width: 180px;
+    }
+    .input:focus, .select:focus{ border-color: rgba(16,185,129,0.7); box-shadow: 0 0 0 3px rgba(16,185,129,0.15); }
+
+    table{
+      width:100%;
+      border-collapse: collapse;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius: 14px;
+      overflow:hidden;
+    }
+    th, td{
+      text-align:left;
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      vertical-align: middle;
+    }
+    th{
+      background:#f9fafb;
+      font-size: 12px;
+      color: #374151;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    tr:hover td{ background: #fcfcfd; }
+    .muted{ color: var(--muted); }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background:#fff;
+      white-space:nowrap;
+    }
+    .b-good{ color: var(--good); border-color: rgba(16,185,129,0.25); background: rgba(16,185,129,0.08); }
+    .b-warn{ color: var(--warn); border-color: rgba(245,158,11,0.25); background: rgba(245,158,11,0.10); }
+    .b-bad{  color: var(--bad);  border-color: rgba(239,68,68,0.25);  background: rgba(239,68,68,0.08); }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding: 6px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      white-space:nowrap;
+      color: #4b5563;
+    }
+
+    .empty{
+      padding: 18px;
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+      text-align:center;
+    }
+
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+      .kpis{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="titleBox">
+        <h1 id="pageTitle">Performance</h1>
+        <p id="pageSub">Students quiz status & results</p>
+      </div>
+
+      <div class="actions">
+        <a class="btn link primary" href="home.html">⬅ Back Home</a>
+        <button class="btn primary" id="btnSeed">+ Demo Data</button>
+        <button class="btn danger" id="btnClear">Clear Results</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Left summary -->
+      <div class="panel">
+        <div class="panelHead">
+          <h2>Summary</h2>
+          <span class="pill" id="viewerRole">Role: -</span>
+        </div>
+        <div class="panelBody">
+          <div class="kpis">
+            <div class="kpi">
+              <div class="label">Total Attempts</div>
+              <div class="val" id="kpiAttempts">0</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Unique Students</div>
+              <div class="val" id="kpiStudents">0</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Excellent</div>
+              <div class="val" id="kpiExcellent">0</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Needs Improvement</div>
+              <div class="val" id="kpiNeeds">0</div>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="empty" id="noteBox">
+            Note: Results yahan tab ayenge jab quiz submit pe data localStorage me save hoga.
+            Neeche wala “Quiz Patch” add kar do.
+          </div>
+        </div>
+      </div>
+
+      <!-- Right table -->
+      <div class="panel">
+        <div class="panelHead">
+          <h2>All Results</h2>
+          <div class="filters">
+            <input class="input" id="search" placeholder="Search student / quiz..." />
+            <select class="select" id="statusFilter">
+              <option value="all">All Status</option>
+              <option value="excellent">Excellent</option>
+              <option value="good">Good</option>
+              <option value="needs">Needs Improvement</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="panelBody">
+          <div id="tableWrap"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ========= Storage Key =========
+    const STORAGE_KEY = "allQuizResults";
+
+    // ========= Auth (same pattern as home.html) =========
+    // home.html currentUser localStorage se uthata hai 3
+    const currentUser = safeJSON(localStorage.getItem("currentUser"));
+
+    if (!currentUser || !currentUser.isLoggedIn) {
+      window.location.href = "choice login.html";
+    }
+
+    const role = (currentUser && currentUser.role) ? currentUser.role : "student";
+    document.getElementById("viewerRole").innerText = "Role: " + role;
+
+    // Admin ko "all students" nazar ayen, student ko sirf apna
+    function canViewAll() {
+      return role === "admin";
+    }
+
+    // ========= Helpers =========
+    function safeJSON(str){
+      try { return JSON.parse(str); } catch(e){ return null; }
+    }
+
+    function getAllResults(){
+      return safeJSON(localStorage.getItem(STORAGE_KEY)) || [];
+    }
+
+    function setAllResults(arr){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+    }
+
+    function formatDate(d){
+      try {
+        const dt = new Date(d);
+        return dt.toLocaleString();
+      } catch(e){
+        return d || "-";
+      }
+    }
+
+    function calcStatus(score, total){
+      const pct = total ? (score / total) * 100 : 0;
+      if (pct >= 80) return { key:"excellent", label:"Excellent 🌟", cls:"b-good" };
+      if (pct >= 50) return { key:"good", label:"Good 👍", cls:"b-warn" };
+      return { key:"needs", label:"Needs Improvement 😐", cls:"b-bad" };
+    }
+
+    function uniqCount(list, key){
+      const s = new Set(list.map(x => (x[key] || "").toLowerCase()).filter(Boolean));
+      return s.size;
+    }
+
+    // ========= UI Render =========
+    const searchEl = document.getElementById("search");
+    const statusEl = document.getElementById("statusFilter");
+    const tableWrap = document.getElementById("tableWrap");
+
+    function render(){
+      const q = (searchEl.value || "").toLowerCase().trim();
+      const statusF = statusEl.value;
+
+      let data = getAllResults();
+
+      // student view: filter own records
+      if (!canViewAll()){
+        data = data.filter(r => (r.studentName || "").toLowerCase() === (currentUser.name || "").toLowerCase());
+        document.getElementById("pageTitle").innerText = "My Performance";
+        document.getElementById("pageSub").innerText = "Your quiz attempts & status";
+      } else {
+        document.getElementById("pageTitle").innerText = "Performance (Admin)";
+        document.getElementById("pageSub").innerText = "All students quiz status & results";
+      }
+
+      // search
+      if (q){
+        data = data.filter(r => {
+          const blob = `${r.studentName||""} ${r.quizName||""}`.toLowerCase();
+          return blob.includes(q);
+        });
+      }
+
+      // status filter
+      if (statusF !== "all"){
+        data = data.filter(r => (r.statusKey || "") === statusF);
+      }
+
+      // Sort latest first
+      data.sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
+
+      // KPIs (based on visible scope without filters? usually scope. We'll use full scope (before search/filter) for summary.
+      const scope = canViewAll() ? getAllResults() : getAllResults().filter(r => (r.studentName||"").toLowerCase() === (currentUser.name||"").toLowerCase());
+      document.getElementById("kpiAttempts").innerText = scope.length;
+      document.getElementById("kpiStudents").innerText = canViewAll() ? uniqCount(scope, "studentName") : 1;
+      document.getElementById("kpiExcellent").innerText = scope.filter(r => r.statusKey === "excellent").length;
+      document.getElementById("kpiNeeds").innerText = scope.filter(r => r.statusKey === "needs").length;
+
+      // Note box hide if results exist
+      document.getElementById("noteBox").style.display = (scope.length > 0) ? "none" : "block";
+
+      // Render table
+      if (!data.length){
+        tableWrap.innerHTML = `<div class="empty">No results found.</div>`;
+        return;
+      }
+
+      const showStudentCol = canViewAll();
+
+      tableWrap.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              ${showStudentCol ? "<th>Student</th>" : ""}
+              <th>Quiz</th>
+              <th>Score</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${data.map(r => {
+              const st = { label: r.statusLabel || "—", cls: r.statusClass || "" };
+              return `
+                <tr>
+                  ${showStudentCol ? `<td><b>${escapeHTML(r.studentName || "-")}</b></td>` : ""}
+                  <td>${escapeHTML(r.quizName || "-")}</td>
+                  <td><span class="pill">${escapeHTML(String(r.score ?? "-"))} / ${escapeHTML(String(r.total ?? "-"))}</span></td>
+                  <td><span class="badge ${st.cls}">${escapeHTML(st.label)}</span></td>
+                  <td class="muted">${escapeHTML(formatDate(r.date))}</td>
+                </tr>
+              `;
+            }).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function escapeHTML(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    searchEl.addEventListener("input", render);
+    statusEl.addEventListener("change", render);
+
+    // ========= Buttons =========
+    document.getElementById("btnClear").addEventListener("click", () => {
+      if (confirm("Clear all saved results?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        render();
+      }
+    });
+
+    document.getElementById("btnSeed").addEventListener("click", () => {
+      // Demo data for testing
+      const demo = [
+        makeRecord("Ali", "English Learning Quiz", 16, 20),
+        makeRecord("Sara", "Graphics Designing MCQs", 9, 20),
+        makeRecord("Ahmed", "English Learning Quiz", 12, 20),
+        makeRecord("Ali", "Graphics Designing MCQs", 18, 20),
+      ];
+      const old = getAllResults();
+      setAllResults([...old, ...demo]);
+      render();
+      alert("Demo data added!");
+    });
+
+    function makeRecord(studentName, quizName, score, total){
+      const st = calcStatus(score, total);
+      return {
+        studentName,
+        quizName,
+        score,
+        total,
+        statusKey: st.key,
+        statusLabel: st.label,
+        statusClass: st.cls,
+        date: new Date().toISOString()
+      };
+    }
+
+    // First render
+    render();
+  </script>
+</body>
+</html>

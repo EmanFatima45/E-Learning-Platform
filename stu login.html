@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - EduLearn</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f766e, #10b981);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-card {
+            background-color: #ffffff;
+            padding: 40px 35px;
+            width: 350px;
+            border-radius: 14px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+
+        .login-card h1 {
+            margin-bottom: 10px;
+            color: #064e3b;
+            font-size: 26px;
+        }
+
+        .login-card p.subtitle {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #065f46;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #d1fae5;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+            background-color: #059669;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #047857;
+        }
+
+        #error-msg {
+            color: #dc2626;
+            background-color: #fee2e2;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: none; /* Hidden by default */
+            border: 1px solid #fecaca;
+        }
+
+        /* Registration Link Style */
+        .register-link {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        .register-link a {
+            color: #059669;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+        <h1>Student Login</h1>
+        <p class="subtitle">Access your courses and dashboard</p>
+
+        <div id="error-msg">Invalid Roll Number or Password!</div>
+
+        <form id="studentLoginForm">
+            <div class="form-group">
+                <label for="rollNumber">Roll Number</label>
+                <input type="text" id="rollNumber" placeholder="e.g. 101" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div class="register-link">
+            Don't have an account? <a href="register (student).html">Register Here</a>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('studentLoginForm');
+        const errorDisplay = document.getElementById('error-msg');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Page refresh rokna
+
+            // 1. Input Values Lena
+            const rollInput = document.getElementById('rollNumber').value.trim();
+            const passInput = document.getElementById('password').value;
+
+            // 2. LocalStorage se registered students check karna
+            const students = JSON.parse(localStorage.getItem('students')) || [];
+
+            // 3. User ko dhundna (Match Roll No & Password)
+            const validUser = students.find(user => user.roll === rollInput && user.password === passInput);
+
+           if (validUser) {
+                // SUCCESS
+                
+                // 1. User object mein 'isLoggedIn' property shamil karein
+                const sessionUser = {
+                    name: validUser.name,
+                    roll: validUser.roll,
+                    isLoggedIn: true  // Ye BOHT ZARURI hai home.html ke liye
+                };
+
+                // 2. Ab is modify shuda user ko save karein
+                localStorage.setItem('currentUser', JSON.stringify(sessionUser));
+                
+                // 3. Global login flag bhi set karein
+                localStorage.setItem('isLoggedIn', 'true');
+
+                alert("Login Successful! Welcome, " + validUser.name);
+                
+                // 4. Redirect to Home Page
+                window.location.href ="student home.html"; 
+            } else {
+                // FAILURE
+                errorDisplay.style.display = "block"; // Error show karna
+                
+                // Password field khali kar dena
+                document.getElementById('password').value = "";
+            }
+        });
+    </script>
+
+</body>
+</html>

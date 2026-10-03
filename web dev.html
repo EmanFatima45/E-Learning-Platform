@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Dev MCQ Quiz with Certificate</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1fb76d;
+            padding: 20px;
+        }
+        .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .question-box {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        .question-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            transition: 0.3s;
+        }
+        .options label:hover {
+            background-color: #e2e6ea;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .btn-wrapper {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .next-btn { background-color: #007bff; }
+        .submit-btn { background-color: #28a745; }
+        .reset-btn { background-color: #dc3545; }
+        .cert-btn { background-color: #ffc107; color: #333; font-weight: bold; } /* Certificate Button Style */
+        
+        .next-btn:hover { background-color: #0056b3; }
+        .submit-btn:hover { background-color: #218838; }
+        .cert-btn:hover { background-color: #e0a800; }
+
+        #part-2, #result-area {
+            display: none;
+        }
+        
+        #result-area {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Web Development Quiz</h2>
+
+    <div id="part-1">
+        <div class="question-box">
+            <div class="question-title">1.What is the full form of HTML?</div>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> Hyper Text Markup Language</label>
+                <label><input type="radio" name="q1" value="b"> High Text Making Language</label>
+                <label><input type="radio" name="q1" value="c"> Hyper Tool Markup Language</label>
+                <label><input type="radio" name="q1" value="d"> None of these</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">2.What is the largest heading in Web page?</div>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> &lt;h6&gt;</label>
+                <label><input type="radio" name="q2" value="b"> &lt;head&gt;</label>
+                <label><input type="radio" name="q2" value="c"> &lt;h1&gt;</label>
+                <label><input type="radio" name="q2" value="d"> &lt;header&gt;</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">3.What is the full form of CSS?</div>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> Creative Style Sheets</label>
+                <label><input type="radio" name="q3" value="b"> Cascading Style Sheets</label>
+                <label><input type="radio" name="q3" value="c"> Computer Style Sheets</label>
+                <label><input type="radio" name="q3" value="d"> Colorful Style Sheets</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">4.Which tag is used for line break in HTML?</div>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> &lt;lb&gt;</label>
+                <label><input type="radio" name="q4" value="b"> &lt;break&gt;</label>
+                <label><input type="radio" name="q4" value="c"> &lt;br&gt;</label>
+                <label><input type="radio" name="q4" value="d"> &lt;bk&gt;</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">5. For changing text colour,what is written in CSS?</div>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> text-color: red;</label>
+                <label><input type="radio" name="q5" value="b"> color: red;</label>
+                <label><input type="radio" name="q5" value="c"> font-color: red;</label>
+                <label><input type="radio" name="q5" value="d"> fgcolor: red;</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">6.What is needed for making a Website responsive?</div>
+            <div class="options">
+                <label><input type="radio" name="q6" value="a"> Tables</label>
+                <label><input type="radio" name="q6" value="b"> PHP</label>
+                <label><input type="radio" name="q6" value="c"> Media Queries</label>
+                <label><input type="radio" name="q6" value="d"> SQL</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">7.where is JavaScript run?</div>
+            <div class="options">
+                <label><input type="radio" name="q7" value="a"> Sirf Server par</label>
+                <label><input type="radio" name="q7" value="b"> Sirf Browser par</label>
+                <label><input type="radio" name="q7" value="c"> Browser aur Server dono par (Node.js)</label>
+                <label><input type="radio" name="q7" value="d"> Sirf Database mein</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">8.  what is the tag for Unordered List (Bullet points)?</div>
+            <div class="options">
+                <label><input type="radio" name="q8" value="a"> &lt;ol&gt;</label>
+                <label><input type="radio" name="q8" value="b"> &lt;ul&gt;</label>
+                <label><input type="radio" name="q8" value="c"> &lt;li&gt;</label>
+                <label><input type="radio" name="q8" value="d"> &lt;list&gt;</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">9.  How External CSS is linked ko HTML?</div>
+            <div class="options">
+                <label><input type="radio" name="q9" value="a"> &lt;link rel="stylesheet" href="style.css"&gt;</label>
+                <label><input type="radio" name="q9" value="b"> &lt;style src="style.css"&gt;</label>
+                <label><input type="radio" name="q9" value="c"> &lt;css>style.css&lt;/css&gt;</label>
+                <label><input type="radio" name="q9" value="d"> &lt;script src="style.css"&gt;</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">10. Which symbol is used in CSS for selecting the ID?</div>
+            <div class="options">
+                <label><input type="radio" name="q10" value="a"> . (dot)</label>
+                <label><input type="radio" name="q10" value="b"> # (hash)</label>
+                <label><input type="radio" name="q10" value="c"> @ (at)</label>
+                <label><input type="radio" name="q10" value="d"> * (star)</label>
+            </div>
+        </div>
+
+        <div class="btn-wrapper">
+            <button class="btn next-btn" onclick="showNextPart()">Next 10 Questions ➡</button>
+        </div>
+    </div>
+
+    <div id="part-2">
+        <div class="question-box">
+            <div class="question-title">11.which tag is used for inserting Image?</div>
+            <div class="options">
+                <label><input type="radio" name="q11" value="a"> &lt;pic&gt;</label>
+                <label><input type="radio" name="q11" value="b"> &lt;image&gt;</label>
+                <label><input type="radio" name="q11" value="c"> &lt;img&gt;</label>
+                <label><input type="radio" name="q11" value="d"> &lt;src&gt;</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">12.which tag is used for Hyperlink?</div>
+            <div class="options">
+                <label><input type="radio" name="q12" value="a"> &lt;a&gt;</label>
+                <label><input type="radio" name="q12" value="b"> &lt;link&gt;</label>
+                <label><input type="radio" name="q12" value="c"> &lt;href&gt;</label>
+                <label><input type="radio" name="q12" value="d"> &lt;h&gt;</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">13.what is Bootstrap?</div>
+            <div class="options">
+                <label><input type="radio" name="q13" value="a"> Programming Language</label>
+                <label><input type="radio" name="q13" value="b"> CSS Framework</label>
+                <label><input type="radio" name="q13" value="c"> Database</label>
+                <label><input type="radio" name="q13" value="d"> Operating System</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">14. which is used in JavaScript for variables?</div>
+            <div class="options">
+                <label><input type="radio" name="q14" value="a"> var</label>
+                <label><input type="radio" name="q14" value="b"> let</label>
+                <label><input type="radio" name="q14" value="c"> const</label>
+                <label><input type="radio" name="q14" value="d"> All of the above</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">15.which tag is used in making Input field?</div>
+            <div class="options">
+                <label><input type="radio" name="q15" value="a"> &lt;textfield&gt;</label>
+                <label><input type="radio" name="q15" value="b"> &lt;input&gt;</label>
+                <label><input type="radio" name="q15" value="c"> &lt;get&gt;</label>
+                <label><input type="radio" name="q15" value="d"> &lt;type&gt;</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">16. which method is secure for sending Form data?</div>
+            <div class="options">
+                <label><input type="radio" name="q16" value="a"> GET</label>
+                <label><input type="radio" name="q16" value="b"> POST</label>
+                <label><input type="radio" name="q16" value="c"> SEND</label>
+                <label><input type="radio" name="q16" value="d"> REQUEST</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">17. In CSS,margin inside the border is called?</div>
+            <div class="options">
+                <label><input type="radio" name="q17" value="a"> Margin</label>
+                <label><input type="radio" name="q17" value="b"> Padding</label>
+                <label><input type="radio" name="q17" value="c"> Border</label>
+                <label><input type="radio" name="q17" value="d"> Spacing</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">18. which tag is used for Table row ?</div>
+            <div class="options">
+                <label><input type="radio" name="q18" value="a"> &lt;td&gt;</label>
+                <label><input type="radio" name="q18" value="b"> &lt;th&gt;</label>
+                <label><input type="radio" name="q18" value="c"> &lt;tr&gt;</label>
+                <label><input type="radio" name="q18" value="d"> &lt;row&gt;</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">19. In JS, 'Alert' box is shown as?</div>
+            <div class="options">
+                <label><input type="radio" name="q19" value="a"> msg('Hello');</label>
+                <label><input type="radio" name="q19" value="b"> alert('Hello');</label>
+                <label><input type="radio" name="q19" value="c"> prompt('Hello');</label>
+                <label><input type="radio" name="q19" value="d"> console.log('Hello');</label>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <div class="question-title">20.Which symbol is used for selecting CSS Class?</div>
+            <div class="options">
+                <label><input type="radio" name="q20" value="a"> # (hash)</label>
+                <label><input type="radio" name="q20" value="b"> . (dot)</label>
+                <label><input type="radio" name="q20" value="c"> $ (dollar)</label>
+                <label><input type="radio" name="q20" value="d"> & (and)</label>
+            </div>
+        </div>
+
+        <div class="btn-wrapper">
+            <button class="btn submit-btn" onclick="calculateScore()">Submit Quiz & Check Score</button>
+        <a href="courses.html">courses</a></div>
+    </div>
+
+    <div id="result-area"></div>
+    <a href="courses.html">courses</a></div>
+ 
+</div>
+
+<script>
+    const correctAnswers = {
+        q1: 'a', q2: 'c', q3: 'b', q4: 'c', q5: 'b',
+        q6: 'c', q7: 'c', q8: 'b', q9: 'a', q10: 'b',
+        q11: 'c', q12: 'a', q13: 'b', q14: 'd', q15: 'b',
+        q16: 'b', q17: 'b', q18: 'c', q19: 'b', q20: 'b'
+    };
+
+    window.onload = function() {
+        const savedAnswers = JSON.parse(localStorage.getItem('quiz_answers')) || {};
+        for (const [qName, value] of Object.entries(savedAnswers)) {
+            const radio = document.querySelector(`input[name="${qName}"][value="${value}"]`);
+            if (radio) radio.checked = true;
+        }
+        
+        if(localStorage.getItem('quiz_part') === '2') {
+            showNextPart();
+        }
+    };
+
+    document.addEventListener('change', function(e) {
+        if (e.target.name && e.target.type === 'radio') {
+            const savedAnswers = JSON.parse(localStorage.getItem('quiz_answers')) || {};
+            savedAnswers[e.target.name] = e.target.value;
+            localStorage.setItem('quiz_answers', JSON.stringify(savedAnswers));
+        }
+    });
+
+    function showNextPart() {
+        document.getElementById('part-1').style.display = 'none';
+        document.getElementById('part-2').style.display = 'block';
+        localStorage.setItem('quiz_part', '2');
+        window.scrollTo(0, 0);
+    }
+
+    function calculateScore() {
+        let score = 0;
+        const total = 20;
+        const savedAnswers = JSON.parse(localStorage.getItem('quiz_answers')) || {};
+
+        for (let i = 1; i <= 20; i++) {
+            const qKey = 'q' + i;
+            if (savedAnswers[qKey] === correctAnswers[qKey]) {
+                score++;
+            }
+        }
+
+        document.getElementById('part-2').style.display = 'none';
+        const resultDiv = document.getElementById('result-area');
+        resultDiv.style.display = 'block';
+        
+        let message = "";
+        let certificateBtn = "";
+
+        // Check Logic for Certificate (Score >= 15)
+        if (score >= 15) {
+            message = "Zabardast! Excellent Work. You passed!";
+            // Certificate Button Code
+            certificateBtn = `<br><button class="btn cert-btn" onclick="claimCertificate()">🏆 Claim Your Certificate</button>`;
+        } else if (score >= 10) {
+            message = "Good effort, but you need 15+ to get a certificate.";
+        } else {
+            message = "Needs improvement, try again!";
+        }
+        
+        resultDiv.innerHTML = `
+            Apka Score: ${score} / ${total} <br>
+            <span style="font-size:18px; color:#555;">${message}</span>
+            ${certificateBtn} 
+            <br>
+            <button class="btn reset-btn" onclick="resetQuiz()">Restart Quiz 🔄</button>
+        `;
+        
+        localStorage.removeItem('quiz_part');
+    }
+
+    // Function specifically for claiming the certificate
+    function claimCertificate() {
+        // Yahan ap student ko kisi real PDF link par bhej skty hain
+        // Example: window.location.href = "certificate.pdf";
+        
+        alert("Congrats your certificate is being generated......(demo)");
+    }
+
+    function resetQuiz() {
+        localStorage.clear();
+        location.reload();
+    }
+    
+</script>
+
+</body>
+</html>

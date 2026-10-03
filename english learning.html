@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English MCQs Quiz</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#1dae72;
+    padding:20px;
+}
+.container{
+    max-width:850px;
+    margin:auto;
+    background:rgb(193, 224, 219);
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+h2{text-align:center}
+.question{
+    background:#e9ecef;
+    padding:15px;
+    margin-bottom:15px;
+    border-left:5px solid #007bff;
+}
+ul{list-style:none;padding:0}
+li{margin:6px 0}
+button{
+    padding:10px 25px;
+    border:none;
+    border-radius:5px;
+    background:#28a745;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+button:hover{background:#218838}
+.back{background:#dc3545}
+.back:hover{background:#c82333}
+.btn{text-align:center;margin-top:20px}
+#part2,#result{display:none}
+.score{
+    font-size:26px;
+    font-weight:bold;
+    color:#007bff;
+}
+.performance{
+    font-size:20px;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>English MCQs Quiz (20 Questions)</h2>
+
+<!-- PART 1 -->
+<div id="part1">
+
+<div class="question"><b>1.</b> Which is a noun?
+<ul>
+<li><input type="radio" name="q1" value="A"> Run</li>
+<li><input type="radio" name="q1" value="B"> Teacher</li>
+<li><input type="radio" name="q1" value="C"> Quickly</li>
+<li><input type="radio" name="q1" value="D"> Beautiful</li>
+</ul></div>
+
+<div class="question"><b>2.</b> Which is a verb?
+<ul>
+<li><input type="radio" name="q2" value="A"> Eat</li>
+<li><input type="radio" name="q2" value="B"> Happy</li>
+<li><input type="radio" name="q2" value="C"> Blue</li>
+<li><input type="radio" name="q2" value="D"> Chair</li>
+</ul></div>
+
+<div class="question"><b>3.</b> Past tense of go?
+<ul>
+<li><input type="radio" name="q3" value="A"> Goed</li>
+<li><input type="radio" name="q3" value="B"> Went</li>
+<li><input type="radio" name="q3" value="C"> Goes</li>
+<li><input type="radio" name="q3" value="D"> Going</li>
+</ul></div>
+
+<div class="question"><b>4.</b> Correct sentence?
+<ul>
+<li><input type="radio" name="q4" value="A"> He go school</li>
+<li><input type="radio" name="q4" value="B"> He goes to school</li>
+<li><input type="radio" name="q4" value="C"> He going school</li>
+<li><input type="radio" name="q4" value="D"> He gone school</li>
+</ul></div>
+
+<div class="question"><b>5.</b> Plural of man?
+<ul>
+<li><input type="radio" name="q5" value="A"> Mans</li>
+<li><input type="radio" name="q5" value="B"> Men</li>
+<li><input type="radio" name="q5" value="C"> Manes</li>
+<li><input type="radio" name="q5" value="D"> Man</li>
+</ul></div>
+
+<div class="question"><b>6.</b> Which is an adjective?
+<ul>
+<li><input type="radio" name="q6" value="A"> Run</li>
+<li><input type="radio" name="q6" value="B"> Tall</li>
+<li><input type="radio" name="q6" value="C"> Quickly</li>
+<li><input type="radio" name="q6" value="D"> Eat</li>
+</ul></div>
+
+<div class="question"><b>7.</b> Correct article: ___ apple
+<ul>
+<li><input type="radio" name="q7" value="A"> A</li>
+<li><input type="radio" name="q7" value="B"> An</li>
+<li><input type="radio" name="q7" value="C"> The</li>
+<li><input type="radio" name="q7" value="D"> No article</li>
+</ul></div>
+
+<div class="question"><b>8.</b> Opposite of hot?
+<ul>
+<li><input type="radio" name="q8" value="A"> Warm</li>
+<li><input type="radio" name="q8" value="B"> Cold</li>
+<li><input type="radio" name="q8" value="C"> Heat</li>
+<li><input type="radio" name="q8" value="D"> Fire</li>
+</ul></div>
+
+<div class="question"><b>9.</b> Which is a pronoun?
+<ul>
+<li><input type="radio" name="q9" value="A"> Ali</li>
+<li><input type="radio" name="q9" value="B"> He</li>
+<li><input type="radio" name="q9" value="C"> Book</li>
+<li><input type="radio" name="q9" value="D"> City</li>
+</ul></div>
+
+<div class="question"><b>10.</b> I am reading – tense?
+<ul>
+<li><input type="radio" name="q10" value="A"> Past</li>
+<li><input type="radio" name="q10" value="B"> Present Continuous</li>
+<li><input type="radio" name="q10" value="C"> Future</li>
+<li><input type="radio" name="q10" value="D"> Past Perfect</li>
+</ul></div>
+
+<div class="btn">
+<button onclick="next()">Next 10 ➡</button>
+</div>
+</div>
+
+<!-- PART 2 -->
+<div id="part2">
+
+<!-- 11–20 -->
+<script>
+for(let i=11;i<=20;i++){
+document.write(`<div class="question"><b>${i}.</b> Sample Question ${i}?
+<ul>
+<li><input type="radio" name="q${i}" value="A"> Option A</li>
+<li><input type="radio" name="q${i}" value="B"> Option B</li>
+<li><input type="radio" name="q${i}" value="C"> Option C</li>
+<li><input type="radio" name="q${i}" value="D"> Option D</li>
+</ul></div>`);
+}
+</script>
+
+<div class="btn">
+<button class="back" onclick="back()">⬅ Back</button>
+<button onclick="result()">Submit Quiz ✅</button>
+</div>
+</div>
+<a href="courses.html">courses</a>
+<!-- RESULT -->
+<div id="result">
+<h2>Quiz Result</h2>
+<p class="score" id="score"></p>
+<p class="performance" id="performance"></p>
+<div class="btn">
+<button onclick="location.reload()">Restart 🔄</button>
+
+</div>
+
+
+
+
+
+<script>
+function next(){
+    part1.style.display="none";
+    part2.style.display="block";
+}
+function back(){
+    part2.style.display="none";
+    part1.style.display="block";
+}
+function result(){
+    let answers={
+        q1:"B",q2:"A",q3:"B",q4:"B",q5:"B",
+        q6:"B",q7:"B",q8:"B",q9:"B",q10:"B"
+    };
+    let score=0;
+    for(let i=1;i<=20;i++){
+        let sel=document.querySelector(`input[name="q${i}"]:checked`);
+        if(sel && answers[`q${i}`]===sel.value) score++;
+    }
+    part2.style.display="none";
+    result.style.display="block";
+    scoreText=`${score} / 20`;
+    document.getElementById("score").innerText="Score: "+scoreText;
+
+    let perf="Needs Improvement 😐";
+    if(score>=16) perf="Excellent 🌟";
+    else if(score>=10) perf="Good 👍";
+    document.getElementById("performance").innerText="Performance: "+perf;
+}
+</script>
+
+</body>
+</html>

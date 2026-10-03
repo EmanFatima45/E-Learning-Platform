@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #f3f4f6; min-height: 100vh; }
+
+        header {
+            background: linear-gradient(135deg, #1e293b, #334155); /* Professional Admin Dark Theme */
+            color: white; padding: 60px 20px; text-align: center;
+            border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .admin-badge {
+            display: inline-block; padding: 5px 20px; background: #3b82f6;
+            border-radius: 30px; font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 1px; margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 1200px; margin: -40px auto 40px; padding: 0 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
+        }
+
+        .card {
+            background: white; padding: 35px; border-radius: 20px; text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: 0.3s;
+            text-decoration: none; display: flex; flex-direction: column; align-items: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .card:hover {
+            transform: translateY(-10px); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+        }
+
+        .icon { font-size: 50px; margin-bottom: 20px; }
+        .card h3 { color: #1e293b; margin-bottom: 12px; font-size: 1.3rem; }
+        .card p { color: #64748b; font-size: 0.95rem; line-height: 1.5; }
+
+        .exit-card:hover { border-color: #ef4444; background: #fff5f5; }
+    </style>
+</head>
+<body id="adminBody">
+
+    <header>
+        <div class="admin-badge">Admin Control Panel</div>
+        <h1 id="welcomeTitle">Welcome, Admin!</h1>
+        <p>Manage your students, courses, and platform settings here.</p>
+    </header>
+
+    <div class="container" id="adminGrid">
+        <a href="student-records.html" class="card">
+            <span class="icon">📂</span>
+            <h3>Student Records</h3>
+            <p>View, edit, and manage all registered student profiles.</p>
+        </a>
+
+        <a href="manage-courses.html" class="card">
+            <span class="icon">📚</span>
+            <h3>Manage Courses</h3>
+            <p>Add new courses or update existing course materials.</p>
+        </a>
+
+        <a href="admin-performance.html" class="card">
+            <span class="icon">📊</span>
+            <h3>Student Performance</h3>
+            <p>Analyze quiz results and overall student progress.</p>
+        </a>
+
+        <a href="view-feedback.html" class="card">
+            <span class="icon">💬</span>
+            <h3>Feedback Inbox</h3>
+            <p>Read and respond to messages sent by students.</p>
+        </a>
+
+        <a href="register (student).html" class="card">
+            <span class="icon">💬</span>
+            <h3>Register here</h3>
+            <p>Read and respond to messages sent by students.</p>
+        </a>
+
+
+        <a href="announcements.html" class="card">
+            <span class="icon">📢</span>
+            <h3>Announcements</h3>
+            <p>Post new updates for students to see on their dashboard.</p>
+        </a>
+
+        <a href="#" class="card exit-card" onclick="logout()">
+            <span class="icon">🚪</span>
+            <h3>Logout</h3>
+            <p>Securely exit the administrator panel.</p>
+        </a>
+
+        <a href="index.html" class="back-btn">← Back to Home</a>
+
+    </div>
+
+    <script>
+        // Agar aap login page se aayi hain, toh ye aapka naam update kar dega
+        window.onload = function() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (user && user.name) {
+                document.getElementById('welcomeTitle').innerText = "Welcome, " + user.name + "!";
+            }
+        };
+
+        function logout() {
+            if (confirm("Are you sure you want to logout?")) {
+                localStorage.removeItem('currentUser');
+                window.location.href = "choice login.html";
+            }
+        }
+    </script>
+</body>
+</html>

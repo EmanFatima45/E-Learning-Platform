@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Announcements</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: hsla(156, 74%, 33%, 0.969); padding: 40px; }
+        .box { background: white; padding: 30px; border-radius: 15px; max-width: 600px; margin: auto; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        textarea { width: 100%; height: 100px; padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin: 15px 0; font-family: inherit; }
+        button { width: 100%; background: hsl(165, 69%, 49%); color: rgb(235, 242, 240); border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .history { margin-top: 30px; }
+        .notice { background: #eff6ff; padding: 10px; border-radius: 5px; margin-bottom: 10px; font-size: 0.9rem; border-right: 4px solid #3b82f6; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <a href="home.html" style="text-decoration:none; color:#2e16cd;">← Dashboard</a>
+        <h2 style="margin-top:10px;">Post New Announcement</h2>
+        <textarea id="noticeInp" placeholder="Type your message for students..."></textarea>
+        <button onclick="postNotice()">Post Announcement</button>
+
+        <div class="history">
+            <h3>Recent Posts:</h3>
+            <div id="noticeHistory">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        function postNotice() {
+            const msg = document.getElementById('noticeInp').value;
+            if(msg) {
+                const history = document.getElementById('noticeHistory');
+                const div = document.createElement('div');
+                div.className = "notice";
+                div.innerText = msg;
+                history.prepend(div); // Naya notice sabse upar
+                alert("Announcement posted successfully!");
+                document.getElementById('noticeInp').value = "";
+            }
+        }
+    </script>
+</body>
+</html>

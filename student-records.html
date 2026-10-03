@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Student Records</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #f3f4f6; padding: 40px; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #1e293b; margin-bottom: 20px; border-bottom: 3px solid #3b82f6; display: inline-block; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+        th { background-color: #3b82f6; color: white; }
+        .no-data { text-align: center; padding: 20px; color: #64748b; font-style: italic; }
+        .back-btn { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #3b82f6; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <a href="home.html" class="back-btn">← Back to Dashboard</a>
+    <div class="card">
+        <h2>Registered Students Database</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Joined Date</th>
+                </tr>
+            </thead>
+            <tbody id="studentData">
+                </tbody>
+        </table>
+        <div id="emptyMsg" class="no-data">No students registered yet.</div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Local storage se students ka data uthana
+            const students = JSON.parse(localStorage.getItem('allStudents')) || [];
+            const tableBody = document.getElementById('studentData');
+            const emptyMsg = document.getElementById('emptyMsg');
+
+            if (students.length > 0) {
+                emptyMsg.style.display = "none";
+                students.forEach(student => {
+                    tableBody.innerHTML += `
+                        <tr>
+                            <td>${student.name}</td>
+                            <td>${student.email}</td>
+                            <td>${student.course || 'N/A'}</td>
+                            <td>${student.date || 'N/A'}</td>
+                        </tr>`;
+                });
+            }
+        };
+    </script>
+</body>
+</html>

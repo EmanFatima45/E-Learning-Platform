@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Home Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f3f4f6;
+            min-height: 100vh;
+        }
+
+        /* --- Header Styling --- */
+        header {
+            background: linear-gradient(135deg, #0f766e, #10b981);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* --- Grid Container --- */
+        .container {
+            max-width: 1000px;
+            margin: -40px auto 40px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* --- Card Styling --- */
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+        }
+
+        .card .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card h3 {
+            color: #1f2937;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: #6b7280;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Color variations for icons */
+        .c-courses { color: #3b82f6; }
+        .c-update { color: #f59e0b; }
+        .c-quiz { color: #10b981; }
+        .c-performance { color: #8b5cf6; }
+        .c-feedback { color: #ec4899; }
+        .c-cert { color: #d97706; } /* New Color for Certificate */
+        .c-exit { color: #ef4444; }
+
+        /* Exit Button specific styling */
+        .exit-card:hover {
+            border-color: #ef4444;
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 id="welcomeText">Welcome, Student!</h1>
+        <p>Explore your dashboard and continue learning.</p>
+    </header>
+
+    <div class="container">
+        
+        <a href="courses.html" class="card">
+            <span class="icon c-courses">📚</span>
+            <h3>Courses</h3>
+            <p>Access your enrolled subjects and study materials.</p>
+        </a>
+
+        <a href="update course.html" class="card">
+            <span class="icon c-update">🔄</span>
+            <h3>Update Course</h3>
+            <p>Change your preferences or add new subjects to your list.</p>
+        </a>
+
+        <a href="web dev.html" class="card">
+            <span class="icon c-quiz">📝</span>
+            <h3>Quiz</h3>
+            <p>Test your knowledge with Web Dev MCQs.</p>
+        </a>
+
+        <a href="performance.html" class="card">
+            <span class="icon c-performance">📊</span>
+            <h3>Performance</h3>
+            <p>View your scores, progress charts, and grades.</p>
+        </a>
+
+        <a href="feedback update.html" class="card">
+            <span class="icon c-feedback">💬</span>
+            <h3>Feedback</h3>
+            <p>Share your thoughts or report issues about the courses.</p>
+        </a>
+
+        <a href="certificate.html" class="card">
+            <span class="icon c-cert">🏆</span>
+            <h3>Get Certificate</h3>
+            <p>Claim and download your course completion certificates.</p>
+        </a>
+
+        <a href="index.html" text-decoration: none;>
+            <div class="card exit-card" onclick="logout()">
+                <span class="icon c-exit">🚪</span>
+                <h3>Exit</h3>
+                <p>Logout securely from your student account.</p>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        // Personalize the header with the logged-in student's name
+        window.onload = function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (currentUser && currentUser.isLoggedIn) {
+                document.getElementById('welcomeText').innerText = "Welcome, " + currentUser.name + "!";
+            } else {
+                // If no one is logged in, you can redirect or just stay (removed forced redirect for testing)
+                // window.location.href = "choice login.html";
+            }
+        };
+
+        // Logout function
+        function logout() {
+            if (confirm("Are you sure you want to logout?")) {
+                localStorage.removeItem('currentUser');
+                window.location.href = "choice login.html"; // Redirect to login
+            }
+        }
+    </script>
+
+</body>
+</html>

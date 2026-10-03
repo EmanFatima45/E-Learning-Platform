@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - EduLearn</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f766e, #10b981);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-card {
+            background-color: #ffffff;
+            padding: 40px 35px;
+            width: 350px;
+            border-radius: 14px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+
+        .login-card h1 {
+            margin-bottom: 10px;
+            color: #064e3b;
+            font-size: 26px;
+        }
+
+        .login-card p.subtitle {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #065f46;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #d1fae5;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+            background-color: #059669;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #047857;
+        }
+
+        #error-msg {
+            color: #dc2626;
+            background-color: #fee2e2;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: none; /* Hidden by default */
+            border: 1px solid #fecaca;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+        <h1>Admin Access</h1>
+        <p class="subtitle">Please enter your secure credentials</p>
+
+        <div id="error-msg">Invalid Username or Password!</div>
+
+        <form id="adminLoginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter admin username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Login to Dashboard</button>
+            <a href="home.html"></a>
+        </form>
+    </div>
+
+    <script>
+        // 1. Fixed Credentials
+        const ADMIN_USER = "admin";
+        const ADMIN_PASS = "12345";
+
+        const loginForm = document.getElementById('adminLoginForm');
+        const errorDisplay = document.getElementById('error-msg');
+
+        // 2. Login Logic
+        loginForm.addEventListener('submit', function(e) {
+            // Prevent page refresh
+            e.preventDefault();
+
+            const inputUser = document.getElementById('username').value;
+            const inputPass = document.getElementById('password').value;
+
+            // 3. Validation Check
+           if (inputUser === ADMIN_USER && inputPass === ADMIN_PASS) {
+    // 1. Role set karein
+    localStorage.setItem('userRole', 'admin');
+    
+    // 2. Login status set karein
+    localStorage.setItem('isLoggedIn', 'true');
+
+    // 3. ZARURI STEP: Admin ko 'currentUser' banaen taake home.html use pehchan le
+    const adminData = {
+        name: "Admin",
+        isLoggedIn: true,
+        role: "admin"
+    };
+    localStorage.setItem('currentUser', JSON.stringify(adminData));
+    
+    alert("Login Successful! Redirecting to Home...");
+    
+    // 4. Ab redirect 'home.html' par hoga
+    window.location.href = "home.html"; 
+} else {
+                // Failure: Show error message
+                errorDisplay.style.display = "block";
+                
+                // Clear password for security
+                document.getElementById('password').value = "";
+            }
+        });
+    </script>
+
+</body>
+</html>

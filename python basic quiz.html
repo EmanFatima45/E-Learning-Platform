@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Basics Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #20915a;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .progress-bar {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .question-item {
+            background-color: #e9ecef;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #007bff;
+            border-radius: 4px;
+            position: relative;
+            transition: 0.3s;
+        }
+        /* Style for completed questions */
+        .question-item.completed {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+            opacity: 0.8;
+        }
+        .question-item h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+        .learn-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            float: right;
+        }
+        .completed .learn-btn {
+            background: #28a745;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+            clear: both;
+        }
+        button {
+            padding: 10px 25px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #section-2 {
+            display: none;
+        }
+        .back-btn {
+            background-color: #dc3545;
+            margin-right: 10px;
+        }
+        .back-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* --- NEW STYLES FOR MCQS --- */
+        .mcq-options {
+            margin-top: 10px;
+        }
+        .mcq-options label {
+            display: block;
+            background: #fff;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .mcq-options label:hover {
+            background-color: #f8f9fa;
+        }
+        .mcq-options input {
+            margin-right: 10px;
+        }
+        .feedback-msg {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 5px;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Python Basics Interview Questions</h2>
+    
+    <div class="progress-bar" id="progressText">Questions Learned: 0 / 20</div>
+
+    <div id="section-1">
+        <div class="question-item" data-id="1">
+            <button class="learn-btn" onclick="toggleLearn(1)">Mark Learned</button>
+            <h3>1. What is Python?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q1" onclick="checkAns(this, false)"> A) Low-level compiled language</label>
+                <label><input type="radio" name="q1" onclick="checkAns(this, true)"> B) High-level, interpreted programming language</label>
+                <label><input type="radio" name="q1" onclick="checkAns(this, false)"> C) A Database Management System</label>
+                <label><input type="radio" name="q1" onclick="checkAns(this, false)"> D) A hardware component</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="2">
+            <button class="learn-btn" onclick="toggleLearn(2)">Mark Learned</button>
+            <h3>2. How are comments written in Python?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q2" onclick="checkAns(this, false)"> A) <code>//</code> symbol</label>
+                <label><input type="radio" name="q2" onclick="checkAns(this, false)"> B) <code>/* */</code> symbol</label>
+                <label><input type="radio" name="q2" onclick="checkAns(this, true)"> C) <code>#</code> symbol</label>
+                <label><input type="radio" name="q2" onclick="checkAns(this, false)"> D) <code>!-- --</code> symbol</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="3">
+            <button class="learn-btn" onclick="toggleLearn(3)">Mark Learned</button>
+            <h3>3. What are variables in Python?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q3" onclick="checkAns(this, true)"> A) Containers used to store data</label>
+                <label><input type="radio" name="q3" onclick="checkAns(this, false)"> B) Loops that repeat code</label>
+                <label><input type="radio" name="q3" onclick="checkAns(this, false)"> C) Functions that print text</label>
+                <label><input type="radio" name="q3" onclick="checkAns(this, false)"> D) Modules to import files</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="4">
+            <button class="learn-btn" onclick="toggleLearn(4)">Mark Learned</button>
+            <h3>4. Is Python case-sensitive?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q4" onclick="checkAns(this, false)"> A) No, it ignores case</label>
+                <label><input type="radio" name="q4" onclick="checkAns(this, true)"> B) Yes, Python is case-sensitive</label>
+                <label><input type="radio" name="q4" onclick="checkAns(this, false)"> C) Only for function names</label>
+                <label><input type="radio" name="q4" onclick="checkAns(this, false)"> D) Only inside comments</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="5">
+            <button class="learn-btn" onclick="toggleLearn(5)">Mark Learned</button>
+            <h3>5. List data types in Python.</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q5" onclick="checkAns(this, false)"> A) varchar, char, date, blob</label>
+                <label><input type="radio" name="q5" onclick="checkAns(this, false)"> B) real, integer, text, boolean only</label>
+                <label><input type="radio" name="q5" onclick="checkAns(this, true)"> C) int, float, string, list, tuple, dictionary, set</label>
+                <label><input type="radio" name="q5" onclick="checkAns(this, false)"> D) array, linkedlist, stack, queue</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="6">
+            <button class="learn-btn" onclick="toggleLearn(6)">Mark Learned</button>
+            <h3>6. What is the difference between List and Tuple?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q6" onclick="checkAns(this, false)"> A) List is immutable, Tuple is mutable</label>
+                <label><input type="radio" name="q6" onclick="checkAns(this, true)"> B) List is mutable, Tuple is immutable</label>
+                <label><input type="radio" name="q6" onclick="checkAns(this, false)"> C) Both are immutable</label>
+                <label><input type="radio" name="q6" onclick="checkAns(this, false)"> D) There is no difference</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="7">
+            <button class="learn-btn" onclick="toggleLearn(7)">Mark Learned</button>
+            <h3>7. How are functions made in Python?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q7" onclick="checkAns(this, false)"> A) <code>func</code> keyword</label>
+                <label><input type="radio" name="q7" onclick="checkAns(this, false)"> B) <code>function</code> keyword</label>
+                <label><input type="radio" name="q7" onclick="checkAns(this, false)"> C) <code>create</code> keyword</label>
+                <label><input type="radio" name="q7" onclick="checkAns(this, true)"> D) <code>def</code> keyword</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="8">
+            <button class="learn-btn" onclick="toggleLearn(8)">Mark Learned</button>
+            <h3>8. What does the `print()` function do?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q8" onclick="checkAns(this, false)"> A) Takes input from user</label>
+                <label><input type="radio" name="q8" onclick="checkAns(this, true)"> B) Shows Output on screen</label>
+                <label><input type="radio" name="q8" onclick="checkAns(this, false)"> C) Saves the file</label>
+                <label><input type="radio" name="q8" onclick="checkAns(this, false)"> D) Stops the program</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="9">
+            <button class="learn-btn" onclick="toggleLearn(9)">Mark Learned</button>
+            <h3>9. Why is indentation necessary in Python?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q9" onclick="checkAns(this, false)"> A) To make code look pretty</label>
+                <label><input type="radio" name="q9" onclick="checkAns(this, true)"> B) To define specific code blocks</label>
+                <label><input type="radio" name="q9" onclick="checkAns(this, false)"> C) It is optional, not necessary</label>
+                <label><input type="radio" name="q9" onclick="checkAns(this, false)"> D) To add comments</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="10">
+            <button class="learn-btn" onclick="toggleLearn(10)">Mark Learned</button>
+            <h3>10. What is a Python interpreter?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q10" onclick="checkAns(this, true)"> A) Executes code line by line</label>
+                <label><input type="radio" name="q10" onclick="checkAns(this, false)"> B) Compiles code all at once</label>
+                <label><input type="radio" name="q10" onclick="checkAns(this, false)"> C) A code editor</label>
+                <label><input type="radio" name="q10" onclick="checkAns(this, false)"> D) A database tool</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="btn-container">
+            <button onclick="showNext()">Next 10 Questions ➡</button>
+        </div>
+    </div>
+
+    <div id="section-2">
+        <div class="question-item" data-id="11">
+            <button class="learn-btn" onclick="toggleLearn(11)">Mark Learned</button>
+            <h3>11. What are the types of loops in Python?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q11" onclick="checkAns(this, false)"> A) <code>do-while</code> and <code>for</code></label>
+                <label><input type="radio" name="q11" onclick="checkAns(this, true)"> B) <code>for</code> and <code>while</code> loops</label>
+                <label><input type="radio" name="q11" onclick="checkAns(this, false)"> C) <code>repeat</code> and <code>until</code></label>
+                <label><input type="radio" name="q11" onclick="checkAns(this, false)"> D) <code>foreach</code> only</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="12">
+            <button class="learn-btn" onclick="toggleLearn(12)">Mark Learned</button>
+            <h3>12. What is the use of the `range()` function?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q12" onclick="checkAns(this, true)"> A) It is used to generate a sequence of numbers</label>
+                <label><input type="radio" name="q12" onclick="checkAns(this, false)"> B) It finds the distance between two points</label>
+                <label><input type="radio" name="q12" onclick="checkAns(this, false)"> C) It returns a random number</label>
+                <label><input type="radio" name="q12" onclick="checkAns(this, false)"> D) It converts string to integer</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="13">
+            <button class="learn-btn" onclick="toggleLearn(13)">Mark Learned</button>
+            <h3>13. How is list indexing performed in Python?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q13" onclick="checkAns(this, false)"> A) Index starts with 1</label>
+                <label><input type="radio" name="q13" onclick="checkAns(this, false)"> B) Index starts with -1</label>
+                <label><input type="radio" name="q13" onclick="checkAns(this, true)"> C) Index starts with zero</label>
+                <label><input type="radio" name="q13" onclick="checkAns(this, false)"> D) Lists cannot be indexed</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="14">
+            <button class="learn-btn" onclick="toggleLearn(14)">Mark Learned</button>
+            <h3>14. What is a Dictionary?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q14" onclick="checkAns(this, false)"> A) An ordered list of numbers</label>
+                <label><input type="radio" name="q14" onclick="checkAns(this, true)"> B) Stores data in Key-value pairs</label>
+                <label><input type="radio" name="q14" onclick="checkAns(this, false)"> C) A hidden system file</label>
+                <label><input type="radio" name="q14" onclick="checkAns(this, false)"> D) A library for spell checking</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="15">
+            <button class="learn-btn" onclick="toggleLearn(15)">Mark Learned</button>
+            <h3>15. What function does `len()` perform?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q15" onclick="checkAns(this, false)"> A) Deletes the last item</label>
+                <label><input type="radio" name="q15" onclick="checkAns(this, false)"> B) Returns the width of screen</label>
+                <label><input type="radio" name="q15" onclick="checkAns(this, false)"> C) Sorts the list</label>
+                <label><input type="radio" name="q15" onclick="checkAns(this, true)"> D) Returns the length of an object</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="16">
+            <button class="learn-btn" onclick="toggleLearn(16)">Mark Learned</button>
+            <h3>16. How to take input in Python?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q16" onclick="checkAns(this, true)"> A) Through <code>input()</code> function</label>
+                <label><input type="radio" name="q16" onclick="checkAns(this, false)"> B) Through <code>scan()</code> function</label>
+                <label><input type="radio" name="q16" onclick="checkAns(this, false)"> C) Through <code>get()</code> function</label>
+                <label><input type="radio" name="q16" onclick="checkAns(this, false)"> D) Through <code>read()</code> function</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="17">
+            <button class="learn-btn" onclick="toggleLearn(17)">Mark Learned</button>
+            <h3>17. Why is `if-else` used?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q17" onclick="checkAns(this, false)"> A) To define a variable</label>
+                <label><input type="radio" name="q17" onclick="checkAns(this, true)"> B) To check a condition</label>
+                <label><input type="radio" name="q17" onclick="checkAns(this, false)"> C) To repeat a task</label>
+                <label><input type="radio" name="q17" onclick="checkAns(this, false)"> D) To import a module</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="18">
+            <button class="learn-btn" onclick="toggleLearn(18)">Mark Learned</button>
+            <h3>18. What is file handling in Python?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q18" onclick="checkAns(this, false)"> A) Installing new software</label>
+                <label><input type="radio" name="q18" onclick="checkAns(this, false)"> B) Browsing the internet</label>
+                <label><input type="radio" name="q18" onclick="checkAns(this, true)"> C) Process of reading and writing files</label>
+                <label><input type="radio" name="q18" onclick="checkAns(this, false)"> D) organizing desktop icons</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="19">
+            <button class="learn-btn" onclick="toggleLearn(19)">Mark Learned</button>
+            <h3>19. Difference between `break` and `continue`?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q19" onclick="checkAns(this, true)"> A) <code>break</code> exits loop, <code>continue</code> goes to next iteration</label>
+                <label><input type="radio" name="q19" onclick="checkAns(this, false)"> B) <code>break</code> pauses loop, <code>continue</code> stops it</label>
+                <label><input type="radio" name="q19" onclick="checkAns(this, false)"> C) Both do exactly the same thing</label>
+                <label><input type="radio" name="q19" onclick="checkAns(this, false)"> D) <code>break</code> skips iteration, <code>continue</code> exits</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="question-item" data-id="20">
+            <button class="learn-btn" onclick="toggleLearn(20)">Mark Learned</button>
+            <h3>20. What is a module in Python?</h3>
+            <div class="mcq-options">
+                <label><input type="radio" name="q20" onclick="checkAns(this, false)"> A) A specific type of loop</label>
+                <label><input type="radio" name="q20" onclick="checkAns(this, false)"> B) A single integer variable</label>
+                <label><input type="radio" name="q20" onclick="checkAns(this, true)"> C) Collection of Functions and variables</label>
+                <label><input type="radio" name="q20" onclick="checkAns(this, false)"> D) A hardware driver</label>
+            </div>
+            <div class="feedback-msg"></div>
+        </div>
+
+        <div class="btn-container">
+            <button class="back-btn" onclick="showPrev()">⬅ Back</button>
+            <button style="background-color: #007bff;" onclick="resetProgress()">Reset Progress 🔄</button>
+            <a href="courses.html">Courses</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Navigation Functions
+    function showNext() {
+        document.getElementById('section-1').style.display = 'none';
+        document.getElementById('section-2').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    function showPrev() {
+        document.getElementById('section-2').style.display = 'none';
+        document.getElementById('section-1').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    // Local Storage & Progress Logic
+    let learnedQuestions = JSON.parse(localStorage.getItem('pythonQuizProgress')) || [];
+
+    function updateUI() {
+        const items = document.querySelectorAll('.question-item');
+        items.forEach(item => {
+            const id = parseInt(item.getAttribute('data-id'));
+            if (learnedQuestions.includes(id)) {
+                item.classList.add('completed');
+                item.querySelector('.learn-btn').innerText = "Learned ✓";
+            } else {
+                item.classList.remove('completed');
+                item.querySelector('.learn-btn').innerText = "Mark Learned";
+            }
+        });
+        document.getElementById('progressText').innerText = `Questions Learned: ${learnedQuestions.length} / 20`;
+    }
+
+    function toggleLearn(id) {
+        if (learnedQuestions.includes(id)) {
+            learnedQuestions = learnedQuestions.filter(item => item !== id);
+        } else {
+            learnedQuestions.push(id);
+        }
+        localStorage.setItem('pythonQuizProgress', JSON.stringify(learnedQuestions));
+        updateUI();
+    }
+
+    function resetProgress() {
+        if(confirm("Are you sure you want to clear your learning progress?")) {
+            learnedQuestions = [];
+            localStorage.removeItem('pythonQuizProgress');
+            updateUI();
+        }
+    }
+
+    // New Function to handle MCQ Clicks
+    function checkAns(element, isCorrect) {
+        // Reset all labels in this specific question
+        const parentDiv = element.closest('.mcq-options');
+        const labels = parentDiv.querySelectorAll('label');
+        labels.forEach(lbl => {
+            lbl.style.backgroundColor = '#fff';
+            lbl.style.color = '#000';
+            lbl.style.borderColor = '#ccc';
+        });
+
+        const feedback = parentDiv.nextElementSibling;
+        
+        // Style the clicked label based on correctness
+        const selectedLabel = element.parentElement;
+        if (isCorrect) {
+            selectedLabel.style.backgroundColor = '#d4edda';
+            selectedLabel.style.borderColor = '#28a745';
+            feedback.innerHTML = "<span style='color:green'>Correct! ✅</span>";
+        } else {
+            selectedLabel.style.backgroundColor = '#f8d7da';
+            selectedLabel.style.borderColor = '#dc3545';
+            feedback.innerHTML = "<span style='color:red'>Wrong Answer ❌</span>";
+        }
+    }
+
+    // Initialize UI on load
+    window.onload = updateUI;
+</script>
+
+</body>
+</html>

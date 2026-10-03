@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #0f766e, #10b981);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: white;
+            width: 380px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        .card h1 {
+            text-align: center;
+            color: #064e3b;
+            margin-bottom: 25px;
+        }
+
+        /* ===== OPTION AS BUTTON ===== */
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #d1fae5;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .option:hover {
+            background-color: #ecfdf5;
+            transform: translateY(-2px);
+        }
+
+        /* hide radio but keep logic */
+        .option input {
+            display: none;
+        }
+
+        /* active/selected effect */
+        .option:has(input:checked) {
+            border-color: #10b981;
+            background-color: #ecfdf5;
+            box-shadow: 0 8px 20px rgba(16,185,129,0.3);
+        }
+
+        .option-text h3 {
+            margin: 0;
+            color: #065f46;
+        }
+
+        .option-text p {
+            margin: 4px 0 0;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        /* Simple styling for the link to look like text */
+        .option-text a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>Login As</h1>
+
+        <label class="option" onclick="handleRoleSelection('admin', 'admin.html')">
+            <input type="radio" name="role" id="role-admin">
+            <div class="option-text">
+                <h3>Admin Login</h3>
+                <p>Access to admin dashboard</p>
+            </div>
+        </label>
+
+        <label class="option" onclick="handleRoleSelection('student', 'stu login.html')">
+            <input type="radio" name="role" id="role-student">
+            <div class="option-text">
+                <h3>Student Login</h3>
+                <p>Access to student panel</p>
+            </div>
+        </label>
+    </div>
+
+    <script>
+        // Runs immediately when the page loads
+        window.onload = function() {
+            // Check if a role was previously selected in this browser
+            const savedRole = localStorage.getItem('userRole');
+            
+            if (savedRole === 'admin') {
+                document.getElementById('role-admin').checked = true;
+            } else if (savedRole === 'student') {
+                document.getElementById('role-student').checked = true;
+            }
+        };
+
+        /**
+         * Logic to save the role and redirect
+         * @param {string} role - 'admin' or 'student'
+         * @param {string} url - The page to navigate to
+         */
+        function handleRoleSelection(role, url) {
+            // 1. Save selection to Local Storage
+            localStorage.setItem('userRole', role);
+            
+            // 2. Clear any previous login status from other roles for security
+            localStorage.removeItem('isLoggedIn'); 
+
+            // 3. Optional: Add a small delay so the user sees the "selection" effect
+            setTimeout(() => {
+                window.location.href = url;
+            }, 200);
+        }
+    </script>
+
+</body>
+</html>

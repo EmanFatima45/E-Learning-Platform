@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #38b583;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Input Form Styles */
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box; /* Fixes padding issue */
+        }
+
+        button {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #34495e;
+        }
+
+        .error-msg {
+            color: red;
+            margin-top: 10px;
+            display: none;
+            font-weight: bold;
+        }
+
+        /* CERTIFICATE STYLES (Professional Look) */
+        #certificateView {
+            display: none; /* Hidden by default */
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #fffcf2; /* Off-white parchment color */
+            border: 20px solid #785c32; /* Bronze/Gold border */
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        /* Inner decorative border */
+        .inner-border {
+            border: 2px solid #785c32;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Corner decorations (using CSS) */
+        .inner-border::before, .inner-border::after {
+            content: "✦";
+            position: absolute;
+            font-size: 40px;
+            color: #785c32;
+        }
+        .inner-border::before { top: -20px; }
+        .inner-border::after { bottom: -20px; }
+
+        .cert-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 50px;
+            font-weight: 700;
+            color: #785c32;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+        }
+
+        .cert-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 30px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .student-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 60px;
+            color: #2c3e50;
+            border-bottom: 2px solid #785c32;
+            padding: 0 20px;
+            display: inline-block;
+            margin: 20px 0;
+            min-width: 300px;
+        }
+
+        .cert-body {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            line-height: 1.6;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .badge-area {
+            margin-top: 40px;
+            font-size: 80px;
+            color: #d4af37; /* Gold badge color */
+        }
+        
+        .signatures {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .sig-line {
+            border-top: 1px solid #333;
+            width: 200px;
+            padding-top: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="form-container" id="inputForm">
+        <h2>Certificate Check</h2>
+        <p>Apna naam aur marks enter karein.</p>
+        <input type="text" id="nameInput" placeholder="Full Name" required>
+        <input type="number" id="marksInput" placeholder="Marks (Out of 20)" required>
+        <button onclick="generateCertificate()">Get Certificate</button>
+        <p class="error-msg" id="errorMsg">Maaf kijiye, certificate ke liye 15 se zyada marks chahiye.</p>
+    </div>
+
+    <div id="certificateView">
+        <div class="inner-border">
+            <div class="cert-title">Certificate</div>
+            <div class="cert-subtitle">of Achievement</div>
+            
+            <div class="cert-body">
+                This is to certify that
+            </div>
+
+            <div class="student-name" id="certName">User Name</div>
+
+            <div class="cert-body">
+                has successfully passed the quiz with excellent performance. 
+                <br>
+                Marks Obtained: <span id="certMarks" style="font-weight:bold">00</span>
+            </div>
+
+            <div class="badge-area">
+                &#10026; 
+            </div>
+
+            <div class="signatures">
+                <div>
+                    <div class="sig-line">Date</div>
+                    <span id="certDate"></span>
+                </div>
+                <div>
+                    <div class="sig-line">Signature</div>
+                </div>
+            </div>
+        </div>
+        
+        <br>
+        <button onclick="location.reload()" style="width: 200px;">Go Back</button>
+    </div>
+
+    <script>
+        function generateCertificate() {
+            // 1. Get Values
+            let name = document.getElementById('nameInput').value;
+            let marks = document.getElementById('marksInput').value;
+            let errorMsg = document.getElementById('errorMsg');
+            let form = document.getElementById('inputForm');
+            let certView = document.getElementById('certificateView');
+
+            // 2. Validation (Check if fields are empty)
+            if(name === "" || marks === "") {
+                alert("Please fill all fields");
+                return;
+            }
+
+            // 3. Logic: Check Marks
+            marks = parseInt(marks); // Convert string to number
+
+            if (marks > 15) {
+                // SUCCESS CASE
+                form.style.display = "none"; // Hide Form
+                certView.style.display = "block"; // Show Certificate
+                
+                // Update Name and Marks in Certificate
+                document.getElementById('certName').innerText = name;
+                document.getElementById('certMarks').innerText = marks;
+                
+                // Set Current Date
+                let today = new Date();
+                document.getElementById('certDate').innerText = today.toLocaleDateString();
+
+            } else {
+                // FAIL CASE
+                errorMsg.style.display = "block";
+                certView.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

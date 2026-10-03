@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Student Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #11998e, #38ef7d); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 380px; text-align: center; }
+        h2 { color: #11998e; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn { background: #38ef7d; color: white; border: none; width: 100%; padding: 12px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn:hover { background: #2ecc71; transform: scale(1.02); }
+        a { color: #11998e; text-decoration: none; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Student Register</h2>
+        <form id="registrationForm">
+            <input type="text" id="regName" placeholder="Full Name" required>
+            <input type="text" id="regRoll" placeholder="Roll Number (e.g. 101)" required>
+            <input type="password" id="regPass" placeholder="Create Password" required>
+            <button type="submit" class="btn">Register Now</button>
+        </form>
+        <p style="margin-top: 15px;">Already registered? <a href="stu login.html">Login here</a></p>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevents page refresh
+
+            // Get values from input fields
+            const name = document.getElementById('regName').value;
+            const rollNumber = document.getElementById('regRoll').value.trim();
+            const password = document.getElementById('regPass').value;
+
+            // 1. Get existing students from LocalStorage or create empty array
+            let students = JSON.parse(localStorage.getItem('students')) || [];
+
+            // 2. Check if Roll Number already exists
+            const studentExists = students.some(student => student.roll === rollNumber);
+
+            if (studentExists) {
+                alert("This Roll Number is already registered. Please login.");
+            } else {
+                // 3. Create student object and add to array
+                const newStudent = {
+                    name: name,
+                    roll: rollNumber,
+                    password: password
+                };
+
+                students.push(newStudent);
+
+                // 4. Save updated array back to LocalStorage
+                localStorage.setItem('students', JSON.stringify(students));
+
+                alert("Registration Successful!");
+                
+                // Optional: Redirect to login page
+                // window.location.href = "stu login.html";
+                
+                // Reset the form
+                document.getElementById('registrationForm').reset();
+            }
+        });
+    </script>
+</body>
+</html>

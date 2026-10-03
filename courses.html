@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Courses</title>
+    <style>
+        /* --- GENERAL STYLES (Same as Dashboard) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0fdf4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: linear-gradient(135deg, #0f766e, #10b981);
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 40px; 
+        }
+
+        header h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* User Section */
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info {
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 15px;
+            border-radius: 20px;
+        }
+
+        .logout-btn {
+            background-color: #dc2626;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #b91c1c;
+        }
+
+        /* --- COURSE GRID SECTION --- */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex: 1; 
+            width: 100%;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* Course Card Styling */
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            border-bottom: 4px solid transparent;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.2);
+            border-bottom: 4px solid #10b981;
+        }
+
+        .card-header-strip {
+            height: 8px;
+            background: #10b981;
+            width: 100%;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+            background: #ecfdf5;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #059669;
+        }
+
+        .course-card h3 {
+            color: #064e3b;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .course-card p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            height: 42px;
+            overflow: hidden;
+        }
+
+        .action-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #059669;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .action-btn:hover {
+            background-color: #047857;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #064e3b;
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: auto;
+        }
+
+        footer p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact a {
+            color: #a7f3d0;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-contact a:hover {
+            color: hsl(0, 0%, 100%);
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <h2>Admin Panel</h2>
+            <nav class="nav-links">
+                <a href="home.html">Home</a> 
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a> 
+            </nav>
+        </div>
+
+        <div class="user-section">
+            <div class="user-info" id="adminDisplayName">Welcome, Admin</div>
+            <button onclick="logoutAdmin()" class="logout-btn"><a href="index.html">logout</a></button>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 style="margin-bottom: 30px; color: #064e3b; text-align: center;">Our Courses</h1>
+
+        <div class="course-grid">
+
+            <div class="course-card">
+                <div class="card-header-strip"></div>
+                <div class="card-content">
+                    <div class="card-icon">💻</div>
+                    <h3>Web Development</h3>
+                    <p>Learn HTML, CSS, JavaScript & backend technologies to build websites.</p>
+                    <a href="web dev.html" onclick="trackCourse('Web Development')" class="action-btn">Manage Course</a>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="card-header-strip"></div>
+                <div class="card-content">
+                    <div class="card-icon">🐍</div>
+                    <h3>Python Basics</h3>
+                    <p>Master the fundamentals of Python, logic building, and data structures.</p>
+                    <a href="python basic quiz.html" onclick="trackCourse('Python Basics')" class="action-btn">Manage Course</a>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="card-header-strip"></div>
+                <div class="card-content">
+                    <div class="card-icon">🎨</div>
+                    <h3>Graphic Designing</h3>
+                    <p>Create stunning visuals using Photoshop, Illustrator, and Canva.</p>
+                    <a href="graphics designing.html" onclick="trackCourse('Graphic Designing')" class="action-btn">Manage Course</a>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="card-header-strip"></div>
+                <div class="card-content">
+                    <div class="card-icon">🗣️</div>
+                    <h3>English Learning</h3>
+                    <p>Improve your communication skills, grammar, and vocabulary effectively.</p>
+                    <a href="english learning.html" onclick="trackCourse('English Learning')" class="action-btn">Manage Course</a>
+                </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Admin Dashboard Panel. All rights reserved.</p>
+        <div class="footer-contact">
+            <a href="mailto:support@adminpanel.com">📧 support@adminpanel.com</a>
+            <a href="tel:+923001234567">📞 +92 300 1234567</a>
+        </div>
+    </footer>
+
+    <script>
+        // 1. SECURITY CHECK: Ensure user is logged in
+        window.onload = function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const adminName = localStorage.getItem('adminUser');
+
+            if (isLoggedIn !== 'true') {
+                // If not logged in, kick them back to login page
+                alert("Access Denied. Please login first.");
+                window.location.href = "login.html"; 
+            } else {
+                // If logged in, customize the welcome text
+                if(adminName) {
+                    document.getElementById('adminDisplayName').innerText = "Welcome, " + adminName;
+                }
+            }
+        };
+
+        // 2. TRACKING: Save the last managed course to Local Storage
+        function trackCourse(courseName) {
+            localStorage.setItem('lastManagedCourse', courseName);
+            console.log("Now managing: " + courseName);
+        }
+
+        // 3. LOGOUT: Clear local storage and redirect
+        function logoutAdmin() {
+            if(confirm("Are you sure you want to logout?")) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('adminUser');
+                // We keep 'userRole' if you want the "Choose Login" page to remember them
+                window.location.href = "login.html";
+            }
+        }
+    </script>
+
+</body>
+</html>

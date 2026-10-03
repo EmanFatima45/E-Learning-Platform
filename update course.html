@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Update Courses</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS: EduLearn Theme Matching */
+        :root {
+            --primary-green: #10b981;
+            --dark-green: #0f766e;
+            --light-bg: #f0fdf4;
+            --text-color: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h2 {
+            color: var(--dark-green);
+            font-size: 24px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Course Grid Layout */
+        .course-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .course-card {
+            border: 2px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .course-card:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-3px);
+        }
+
+        /* Selected State */
+        .course-card.selected {
+            background-color: #ecfdf5;
+            border-color: var(--primary-green);
+        }
+
+        .course-card input {
+            display: none; /* Hide checkbox but keep logic */
+        }
+
+        .course-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .course-name {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .btn-save {
+            background: linear-gradient(to right, var(--dark-green), var(--primary-green));
+            color: white;
+        }
+
+        .btn-back {
+            background: #e2e8f0;
+            color: #475569;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Success Message */
+        #status {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 500;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h2>Update Your Courses</h2>
+            <p>Select the subjects you want to add to your dashboard.</p>
+        </div>
+
+        <form id="courseForm">
+            <div class="course-selection">
+                <label class="course-card" id="card-web">
+                    <span class="course-icon">🌐</span>
+                    <span class="course-name">Web Development</span>
+                    <input type="checkbox" name="courses" value="Web Development">
+                </label>
+
+                <label class="course-card" id="card-python">
+                    <span class="course-icon">🐍</span>
+                    <span class="course-name">Python Programming</span>
+                    <input type="checkbox" name="courses" value="Python Programming">
+                </label>
+
+                <label class="course-card" id="card-uiux">
+                    <span class="course-icon">🎨</span>
+                    <span class="course-name">UI/UX Design</span>
+                    <input type="checkbox" name="courses" value="UI/UX Design">
+                </label>
+
+                <label class="course-card" id="card-data">
+                    <span class="course-icon">📊</span>
+                    <span class="course-name">Data Science</span>
+                    <input type="checkbox" name="courses" value="Data Science">
+                </label>
+            </div>
+
+            <div id="status"></div>
+
+            <div class="btn-group">
+                <a href="home.html" class="btn btn-back">Back to Home</a>
+                <button type="submit" class="btn btn-save">Save Changes</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const courseForm = document.getElementById('courseForm');
+        const statusMsg = document.getElementById('status');
+        const cards = document.querySelectorAll('.course-card');
+
+        // 1. UI Toggle Logic (Card click par color change karna)
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                const checkbox = this.querySelector('input');
+                if(checkbox.checked) {
+                    this.classList.add('selected');
+                } else {
+                    this.classList.remove('selected');
+                }
+            });
+        });
+
+        // 2. Load existing courses from LocalStorage on page load
+        window.onload = function() {
+            const savedCourses = JSON.parse(localStorage.getItem('selectedCourses')) || [];
+            cards.forEach(card => {
+                const checkbox = card.querySelector('input');
+                if(savedCourses.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                    card.classList.add('selected');
+                }
+            });
+        };
+
+        // 3. Form Submit Logic (LocalStorage mein save karna)
+        courseForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const selectedCheckboxes = document.querySelectorAll('input[name="courses"]:checked');
+            const selectedValues = Array.from(selectedCheckboxes).map(cb => cb.value);
+
+            // Save to LocalStorage
+            localStorage.setItem('selectedCourses', JSON.stringify(selectedValues));
+
+            // Show Success Message
+            statusMsg.textContent = "✅ Courses updated successfully!";
+            statusMsg.style.color = "#059669";
+            statusMsg.style.display = "block";
+
+            // Redirect to dashboard after 1.5 seconds
+            setTimeout(() => {
+                window.location.href = "home.html";
+            }, 1500);
+        });
+    </script>
+
+</body>
+</html>
